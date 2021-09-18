@@ -1,3 +1,3 @@
-# pinnacle
+# ARmory
 
-VR app coming soon...
+An alternative AR controller for equipment swapping.
