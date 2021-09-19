@@ -14,10 +14,11 @@ public class TCPClient : MonoBehaviour {
 	private Thread clientReceiveThread;
 	#endregion
 
-    private 
+    private float lastShot;
 
 	void Start () {
 		ConnectToTcpServer();
+		lastShot = Time.time;
 	}
 
 	/// <summary>
@@ -42,7 +43,7 @@ public class TCPClient : MonoBehaviour {
 			socketConnection = new TcpClient("192.168.162.236", 80);
 			SendMessage("Connected to server\n");
 			Byte[] bytes = new Byte[1024];
-			while (true) {		
+			while (true) {
 				// Get a stream object for reading	
 				using (NetworkStream stream = socketConnection.GetStream()) {
 					int length;
@@ -56,11 +57,12 @@ public class TCPClient : MonoBehaviour {
                             Player.Instance.EquipSword();
                         } else if (serverMessage == "shield" && Player.Instance.currentEquipped != EQUIPPED.SHIELD) {
                             Player.Instance.EquipShield();
-                        } else {
-                            if (Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
-                                Player.Instance.EquipCrossbow();
-                            }
-                        }
+                        } else if (serverMessage == "crossbow" && Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
+                            Player.Instance.EquipCrossbow();
+                        } else if (serverMessage == "shoot" && Time.time - lastShot >= 1.0f) {
+							Player.crossbow.shoot();
+							lastShot = Time.time;
+						}
 						Debug.Log("server message received as: " + serverMessage);
 					}
 				}
