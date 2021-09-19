@@ -23,7 +23,11 @@ public class Enemy : MonoBehaviour
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
         } else {
             animator.SetTrigger("Attack");
-            //animator.SetTrigger("Die");
         }
+    }
+
+    public void Die() {
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 5.0f);
     }
 }
