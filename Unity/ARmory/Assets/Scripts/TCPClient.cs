@@ -14,6 +14,8 @@ public class TCPClient : MonoBehaviour {
 	private Thread clientReceiveThread;
 	#endregion
 
+    private 
+
 	void Start () {
 		ConnectToTcpServer();
 	}
@@ -50,6 +52,15 @@ public class TCPClient : MonoBehaviour {
 						Array.Copy(bytes, 0, incommingData, 0, length);
 						// Convert byte array to string message.
 						string serverMessage = Encoding.ASCII.GetString(incommingData);
+                        if (serverMessage == "sword" && Player.Instance.currentEquipped != EQUIPPED.SWORD) {
+                            Player.Instance.EquipSword();
+                        } else if (serverMessage == "shield" && Player.Instance.currentEquipped != EQUIPPED.SHIELD) {
+                            Player.Instance.EquipShield();
+                        } else {
+                            if (Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
+                                Player.Instance.EquipCrossbow();
+                            }
+                        }
 						Debug.Log("server message received as: " + serverMessage);
 					}
 				}
