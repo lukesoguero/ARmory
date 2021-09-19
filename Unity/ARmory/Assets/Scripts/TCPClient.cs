@@ -41,6 +41,7 @@ public class TCPClient : MonoBehaviour {
 		try {
 			socketConnection = new TcpClient("192.168.162.236", 80);
 			SendMessage("Connected to server\n");
+			Debug.Log("Connected to client");
 			Byte[] bytes = new Byte[1024];
 			while (true) {		
 				// Get a stream object for reading	
