@@ -60,7 +60,7 @@ public class TCPClient : MonoBehaviour {
                         } else if (serverMessage == "crossbow" && Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
                             Player.Instance.EquipCrossbow();
                         } else if (serverMessage == "shoot" && Time.time - lastShot >= 1.0f) {
-							Player.crossbow.shoot();
+							Player.Instance.crossbow.GetComponent<Crossbow>().Shoot();
 							lastShot = Time.time;
 						}
 						Debug.Log("server message received as: " + serverMessage);
