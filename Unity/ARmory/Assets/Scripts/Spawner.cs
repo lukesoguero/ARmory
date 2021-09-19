@@ -7,12 +7,14 @@ public class Spawner : MonoBehaviour
     public GameObject enemy;
     public float spawnRadius = 5.0f;
     public float spawnTimer = 10f;
+    public int maxInScene = 3;
+    public int enemyCount = 0;
+    public Transform[] spawnPoints;
 
-    private int enemyCount = 0;
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnEnemy());
     }
 
     // Update is called once per frame
@@ -23,12 +25,13 @@ public class Spawner : MonoBehaviour
 
      IEnumerator SpawnEnemy()
      {
-         while(enemyCount < 100)
+         while(enemyCount < maxInScene)
          {
-            Vector2 spawnPos = Player.Instance.transform.position; 
-            spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
+            Instantiate(enemy, spawnPoints[Random.Range(0, spawnPoints.Length)]);
+            // Vector2 spawnPos = Player.Instance.transform.position; 
+            // spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
 
-            Instantiate(enemy, spawnPos, Quaternion.identity);
+            // Instantiate(enemy, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(spawnTimer);
             enemyCount++; 
          }

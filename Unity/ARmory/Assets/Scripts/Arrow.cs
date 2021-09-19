@@ -16,11 +16,12 @@ public class Arrow : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.name == "Enemy")
+        //Debug.Log(other.gameObject.tag);
+        if(other.gameObject.tag == "Enemy")
         {
-            //collision.gameObject.GetComponent<Enemy>().Die();
+            other.gameObject.GetComponent<Enemy>().Die();
         }
     }
 }

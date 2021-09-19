@@ -16,11 +16,11 @@ public class Shield : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+   void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.name == "Enemy")
+        if(other.gameObject.tag == "Enemy")
         {
-            //collision.gameObject.GetComponent<Enemy>().Block();
+            other.gameObject.GetComponent<Enemy>().Block();
         }
     }
 }

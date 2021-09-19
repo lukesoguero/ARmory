@@ -20,6 +20,7 @@ public class Crossbow : MonoBehaviour
 
     public void Shoot()
     {
+        //Debug.Log("In Shoot function");
         GameObject arrow = Instantiate(projectile, transform.position, transform.rotation);
         arrow.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, launchVelocity, 0));
         Destroy(arrow, 3.0f);

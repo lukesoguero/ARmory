@@ -16,11 +16,11 @@ public class Sword : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.name == "Enemy")
+        if(other.gameObject.tag == "Enemy")
         {
-            //collision.gameObject.GetComponent<Enemy>().Die();
+            other.gameObject.GetComponent<Enemy>().Die();
         }
     }
 }

@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     public void EquipCrossbow()
     {
-        Debug.Log("Crossbow equipped");
+        //Debug.Log("Crossbow equipped");
         currentEquipped = EQUIPPED.CROSSBOW;
 
         crossbow.SetActive(true);
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
 
     public void EquipSword()
     {
-        Debug.Log("Sword equipped");
+        //Debug.Log("Sword equipped");
         currentEquipped = EQUIPPED.SWORD;
 
         sword.SetActive(true);
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 
     public void EquipShield()
     {
-        Debug.Log("Shield equipped");
+        //Debug.Log("Shield equipped");
         currentEquipped = EQUIPPED.SHIELD;
 
         shield.SetActive(true);

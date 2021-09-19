@@ -54,17 +54,25 @@ public class TCPClient : MonoBehaviour {
 						Array.Copy(bytes, 0, incommingData, 0, length);
 						// Convert byte array to string message.
 						string serverMessage = Encoding.ASCII.GetString(incommingData);
-                        if (serverMessage == "sword" && Player.Instance.currentEquipped != EQUIPPED.SWORD) {
-                            Player.Instance.EquipSword();
-                        } else if (serverMessage == "shield" && Player.Instance.currentEquipped != EQUIPPED.SHIELD) {
-                            Player.Instance.EquipShield();
-                        } else if (serverMessage == "crossbow" && Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
-                            Player.Instance.EquipCrossbow();
-                        } else if (serverMessage == "shoot" && Time.time - lastShot >= 1.0f) {
-							Player.Instance.crossbow.GetComponent<Crossbow>().Shoot();
-							lastShot = Time.time;
+                        if (serverMessage.Contains("sword") && Player.Instance.currentEquipped != EQUIPPED.SWORD) {
+							Debug.Log("Sword equipped");
+							UnityMainThreadDispatcher.Instance().Enqueue(EquipSwordFromMainThread());
+                            //Player.Instance.EquipSword();
+                        } else if (serverMessage.Contains("shield") && Player.Instance.currentEquipped != EQUIPPED.SHIELD) {
+							Debug.Log("Shield equipped");
+							UnityMainThreadDispatcher.Instance().Enqueue(EquipShieldFromMainThread());
+                            //Player.Instance.EquipShield();
+                        } else if (serverMessage.Contains("crossbow") && Player.Instance.currentEquipped != EQUIPPED.CROSSBOW) {
+							Debug.Log("Crossbow equipped");
+							UnityMainThreadDispatcher.Instance().Enqueue(EquipCrossbowFromMainThread());
+                            //Player.Instance.EquipCrossbow();
+                        } else if (serverMessage.Contains("shoot")) {
+							Debug.Log("Shooting");
+							UnityMainThreadDispatcher.Instance().Enqueue(ShootFromMainThread());
+							//Player.Instance.crossbow.GetComponent<Crossbow>().Shoot();
+							//lastShot = Time.time;
 						}
-						Debug.Log("server message received as: " + serverMessage);
+						//Debug.Log("server message received as: " + serverMessage);
 					}
 				}
 			}
@@ -93,5 +101,29 @@ public class TCPClient : MonoBehaviour {
 		catch (SocketException socketException) {
 			Debug.Log("Socket exception: " + socketException);
 		}
+	}
+
+	private IEnumerator EquipSwordFromMainThread()
+	{
+		Player.Instance.EquipSword();
+		yield return null;
+	}
+
+	private IEnumerator EquipShieldFromMainThread()
+	{
+		Player.Instance.EquipShield();
+		yield return null;
+	}
+
+	private IEnumerator EquipCrossbowFromMainThread()
+	{
+		Player.Instance.EquipCrossbow();
+		yield return null;
+	}
+
+	private IEnumerator ShootFromMainThread()
+	{
+		Player.Instance.crossbow.GetComponent<Crossbow>().Shoot();
+		yield return null;
 	}
 }
