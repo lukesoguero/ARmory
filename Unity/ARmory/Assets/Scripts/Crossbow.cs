@@ -18,7 +18,7 @@ public class Crossbow : MonoBehaviour
         
     }
 
-    void Shoot()
+    public void Shoot()
     {
         GameObject arrow = Instantiate(projectile, transform.position, transform.rotation);
         arrow.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, launchVelocity, 0));
