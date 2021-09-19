@@ -48,7 +48,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Player.Instance.EquipCrossbow();
+        if(Input.GetKeyDown("space"))
+        {
+            crossbow.GetComponent<Crossbow>().Shoot();
+        }
     }
 
     public void EquipCrossbow()

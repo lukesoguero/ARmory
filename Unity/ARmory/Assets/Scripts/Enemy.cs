@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 
     void Start() {
         animator = GetComponent<Animator>();
+        player = Player.Instance.transform;
     }
 
     // Update is called once per frame

@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e706ebb94040a46a963cd42c88f0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 2608454355981194067, guid: 632123ecced833c4880bf5c10c969ede,
+  projectile: {fileID: 5297146530901406044, guid: c82b5850718e61d4bbbc9c942b15b56e,
     type: 3}
   launchVelocity: 700
